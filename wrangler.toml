@@ -1,1 +1,6 @@
-name = "professional-business-site"\ncompatibility_date = "2024-01-01"\npages_build_output_dir = "dist"\n\n[vars]\nNODE_VERSION = "22.13.0"
+name = "professional-business-site"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "dist"
+
+[vars]
+NODE_VERSION = "22.13.0"
