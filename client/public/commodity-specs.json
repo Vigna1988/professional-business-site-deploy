@@ -1,0 +1,300 @@
+{
+  "categories": [
+    {
+      "name": "Rice",
+      "commodities": [
+        {
+          "name": "Jasmine (Vietnam)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.0% max"},
+            {"parameter": "Foreign Matters", "value": "0.1% max"},
+            {"parameter": "Chalky Kernels", "value": "2.0% max"},
+            {"parameter": "Damage Kernels", "value": "0.3% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "0.3% max"},
+            {"parameter": "Yellow Kernels", "value": "0.3% max"},
+            {"parameter": "Average Length", "value": "6.8mm"}
+          ]
+        },
+        {
+          "name": "Japonica (Vietnam)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.5% max"},
+            {"parameter": "Foreign Matters", "value": "0.5% max"},
+            {"parameter": "Chalky Kernels", "value": "3.0% max"},
+            {"parameter": "Damage Kernels", "value": "0.1% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "0.5% max"},
+            {"parameter": "Yellow Kernels", "value": "0.5% max"},
+            {"parameter": "Average Length", "value": "4.8mm"}
+          ]
+        },
+        {
+          "name": "Dai Thom 8 (Vietnam)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.5% max"},
+            {"parameter": "Foreign Matters", "value": "0.1% max"},
+            {"parameter": "Chalky Kernels", "value": "2.0% max"},
+            {"parameter": "Damage Kernels", "value": "0.5% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "0.5% max"},
+            {"parameter": "Yellow Kernels", "value": "0.5% max"},
+            {"parameter": "Average Length", "value": "6.5mm"}
+          ]
+        },
+        {
+          "name": "OM 5451 (Vietnam)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.5% max"},
+            {"parameter": "Foreign Matters", "value": "0.1% max"},
+            {"parameter": "Chalky Kernels", "value": "3.0% max"},
+            {"parameter": "Damage Kernels", "value": "0.5% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "0.5% max"},
+            {"parameter": "Yellow Kernels", "value": "0.5% max"},
+            {"parameter": "Average Length", "value": "6.6mm"}
+          ]
+        },
+        {
+          "name": "504 (Vietnam)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.0% max"},
+            {"parameter": "Foreign Matters", "value": "0.1% max"},
+            {"parameter": "Chalky Kernels", "value": "6.0% max"},
+            {"parameter": "Damage Kernels", "value": "0.5% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "0.5% max"},
+            {"parameter": "Yellow Kernels", "value": "0.5% max"},
+            {"parameter": "Average Length", "value": "6.2mm"}
+          ]
+        },
+        {
+          "name": "Glutinous (Vietnam)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.0% max"},
+            {"parameter": "Foreign Matters", "value": "0.2% max"},
+            {"parameter": "Chalky Kernels", "value": "2.0% max"},
+            {"parameter": "Damage Kernels", "value": "3.0% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "1.5% max"},
+            {"parameter": "Yellow Kernels", "value": "1.5% max"},
+            {"parameter": "Average Length", "value": "5.8mm"}
+          ]
+        },
+        {
+          "name": "Emata (Myanmar)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.0% max"},
+            {"parameter": "Foreign Matters", "value": "0.2% max"},
+            {"parameter": "Chalky Kernels", "value": "2.5% max"},
+            {"parameter": "Damage Kernels", "value": "0.5% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "2.0% max"},
+            {"parameter": "Yellow Kernels", "value": "0.5% max"},
+            {"parameter": "Average Length", "value": "6.0mm"}
+          ]
+        },
+        {
+          "name": "IRRI 6 (Pakistan)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.0% max"},
+            {"parameter": "Foreign Matters", "value": "N/A"},
+            {"parameter": "Chalky Kernels", "value": "4.0% max"},
+            {"parameter": "Damage Kernels", "value": "4.0% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "1.5% max"},
+            {"parameter": "Yellow Kernels", "value": "0.5% max"},
+            {"parameter": "Average Length", "value": "6.0mm"}
+          ]
+        },
+        {
+          "name": "Swarna (India)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.0% max"},
+            {"parameter": "Foreign Matters", "value": "0.25% max"},
+            {"parameter": "Chalky Kernels", "value": "4.0% max"},
+            {"parameter": "Damage Kernels", "value": "1.0% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "0.5% max"},
+            {"parameter": "Yellow Kernels", "value": "0.5% max"},
+            {"parameter": "Average Length", "value": "5.2mm"}
+          ]
+        },
+        {
+          "name": "IR64 (India)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.0% max"},
+            {"parameter": "Foreign Matters", "value": "0.25% max"},
+            {"parameter": "Chalky Kernels", "value": "4.0% max"},
+            {"parameter": "Damage Kernels", "value": "0.1% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "1.5% max"},
+            {"parameter": "Yellow Kernels", "value": "0.3% max"},
+            {"parameter": "Average Length", "value": "6.0mm"}
+          ]
+        },
+        {
+          "name": "Thai Hom Mali (Thailand)",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.0% max"},
+            {"parameter": "Foreign Matters", "value": "0.25% max"},
+            {"parameter": "Chalky Kernels", "value": "6.0% max"},
+            {"parameter": "Damage Kernels", "value": "1.0% max"},
+            {"parameter": "Red and Red Streaked Kernels", "value": "2.0% max"},
+            {"parameter": "Yellow Kernels", "value": "0.5% max"},
+            {"parameter": "Average Length", "value": "7.0mm"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Corn",
+      "commodities": [
+        {
+          "name": "Yellow Corn",
+          "specifications": [
+            {"parameter": "Moisture", "value": "14.0% max"},
+            {"parameter": "Admixture", "value": "1.5% max"},
+            {"parameter": "Broken Kernels", "value": "5.0% max"},
+            {"parameter": "Aflatoxin", "value": "30 ppb max"},
+            {"parameter": "Protein", "value": "8.0% min"},
+            {"parameter": "Discolored", "value": "1.0% max"},
+            {"parameter": "Foreign Matters", "value": "0.5% max"},
+            {"parameter": "Damaged Kernels", "value": "1.5% max"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Wheat",
+      "commodities": [
+        {
+          "name": "Hard Milling Wheat",
+          "specifications": [
+            {"parameter": "Test Weight", "value": "78 Kg/HL"},
+            {"parameter": "Protein", "value": "11% on 12% moisture"},
+            {"parameter": "Moisture", "value": "13.5% max"},
+            {"parameter": "Impurities (dockage)", "value": "1.0% max"},
+            {"parameter": "Shrunken and Broken Kernels", "value": "5.0% max"},
+            {"parameter": "Damaged Grains", "value": "2.0% max"},
+            {"parameter": "Foreign Matter", "value": "7.0% max"},
+            {"parameter": "Ergot", "value": "0.05% max"},
+            {"parameter": "Wet Gluten", "value": "28% min"},
+            {"parameter": "Falling Number", "value": "280 sec min (allowed 250 sec)"},
+            {"parameter": "Aflatoxins", "value": "5 ppb max"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sugar",
+      "commodities": [
+        {
+          "name": "Refined White Sugar (ICUMSA 45)",
+          "specifications": [
+            {"parameter": "ICUMSA", "value": "45"},
+            {"parameter": "Ash Content", "value": "0.04% max"},
+            {"parameter": "Moisture", "value": "0.04% max"},
+            {"parameter": "Magnetic Particles", "value": "4 mg/kg"},
+            {"parameter": "Solubility", "value": "100% dry & free flowing"},
+            {"parameter": "Granulation", "value": "Fine Standard"},
+            {"parameter": "Polarization", "value": "99.8% min"},
+            {"parameter": "Color", "value": "Sparkling White"},
+            {"parameter": "Substance", "value": "Solid, Crystal"},
+            {"parameter": "Sulfur Content", "value": "10 ppm max"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Edible Oil",
+      "commodities": [
+        {
+          "name": "CP8 Palm Oil",
+          "specifications": [
+            {"parameter": "Free Fatty Acid", "value": "0.1% max"},
+            {"parameter": "Iodine Value", "value": "58.0 min"},
+            {"parameter": "Moisture and Impurities", "value": "0.1% max"},
+            {"parameter": "Slip Melting Point", "value": "22.0°C max"},
+            {"parameter": "Cloud Point", "value": "8.0°C max"},
+            {"parameter": "Color", "value": "3.0 R max"},
+            {"parameter": "Odor and Taste", "value": "Neutral"}
+          ]
+        },
+        {
+          "name": "CP10 Palm Oil",
+          "specifications": [
+            {"parameter": "Free Fatty Acid", "value": "0.1% max"},
+            {"parameter": "Iodine Value", "value": "56.0 min"},
+            {"parameter": "Moisture and Impurities", "value": "0.1% max"},
+            {"parameter": "Slip Melting Point", "value": "24.0°C max"},
+            {"parameter": "Cloud Point", "value": "10.0°C max"},
+            {"parameter": "Color", "value": "3.0 R max"},
+            {"parameter": "Odor and Taste", "value": "Neutral"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Energy & Coal",
+      "commodities": [
+        {
+          "name": "Coal GAR4500",
+          "hasBasis": true,
+          "specifications": [
+            {"parameter": "Total Moisture", "unit": "Weight %", "arb": "29.4"},
+            {"parameter": "Ash Content", "unit": "Weight %", "adb": "5.48", "arb": "4.36"},
+            {"parameter": "Volatile Matter", "unit": "Weight %", "adb": "44.65", "arb": "35.56"},
+            {"parameter": "Fixed Carbon", "unit": "Weight %", "adb": "38.51", "arb": "30.68"},
+            {"parameter": "Total Sulfur", "unit": "Weight %", "adb": "1.87", "arb": "1.49"},
+            {"parameter": "Gross Calorific Value", "unit": "Kcal/Kg", "adb": "5,896", "arb": "4,696"},
+            {"parameter": "HGI", "unit": "Index", "merged": "40"}
+          ]
+        },
+        {
+          "name": "Coal GAR6000",
+          "hasBasis": true,
+          "specifications": [
+            {"parameter": "Total Moisture", "unit": "Weight %", "arb": "8.42"},
+            {"parameter": "Ash Content", "unit": "Weight %", "adb": "15.27"},
+            {"parameter": "Volatile Matter", "unit": "Weight %", "adb": "41.01"},
+            {"parameter": "Fixed Carbon", "unit": "Weight %", "adb": "38.07"},
+            {"parameter": "Total Sulfur", "unit": "Weight %", "adb": "0.43"},
+            {"parameter": "Gross Calorific Value", "unit": "Kcal/Kg", "adb": "6,343", "arb": "6,157"},
+            {"parameter": "HGI", "unit": "Index", "merged": "45"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Oil Trading",
+      "commodities": [
+        {
+          "name": "Diesel (EN 590)",
+          "specifications": [
+            {"parameter": "Density (15°C)", "value": "0.82-0.845 kg/l"},
+            {"parameter": "Kinematic Viscosity (40°C)", "value": "2.0-4.5 mm²/s"},
+            {"parameter": "Cetane Number", "value": "51 min"},
+            {"parameter": "Flash Point (PMCC)", "value": "55°C min"},
+            {"parameter": "Cloud Point (summer)", "value": "-2°C max"},
+            {"parameter": "Water Content", "value": "200 mg/kg max"},
+            {"parameter": "Particulate Content", "value": "24 mg/kg max"},
+            {"parameter": "Ash Content", "value": "0.01% max"},
+            {"parameter": "PAHs", "value": "8% (v/v) max"},
+            {"parameter": "Oxidation Stability", "value": "25 g/m³ max"},
+            {"parameter": "Lubricity (HFRR)", "value": "460 µm max"},
+            {"parameter": "FAME Content", "value": "7.0% (v/v) max"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Meat & Poultry",
+      "commodities": [
+        {
+          "name": "Chicken Paw (Grade A)",
+          "specifications": [
+            {"parameter": "Weight", "value": "30 gram min"},
+            {"parameter": "Length", "value": "7-12 cm"},
+            {"parameter": "Blast Frozen", "value": "-40°C"},
+            {"parameter": "Stocked At", "value": "-18°C"},
+            {"parameter": "Blood Clot", "value": "None"},
+            {"parameter": "Shelf Life", "value": "24 Months"},
+            {"parameter": "Bad Smell", "value": "None"},
+            {"parameter": "Freezing Process", "value": "IQF (Individual Quick Frozen)"}
+          ]
+        }
+      ]
+    }
+  ]
+}

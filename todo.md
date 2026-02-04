@@ -1,0 +1,30 @@
+- [x] Fix hero slider order: Energy & Coal and Oil Trading slides are swapped causing wrong navigation
+- [x] Fix Business page tabs: clicking tabs doesn't switch content or update highlighting after initial page load
+- [x] Remove "Established in April 2025" text from website
+- [x] Fix Read Our Story button to scroll to top of About section
+- [x] Fix Business page tab navigation not working after clicks
+- [x] Add navigation links to Home page category cards to link to Business page tabs
+- [x] Fix Business page: category card navigation only works first time, subsequent clicks don't work
+- [x] Fix site blinking/flickering during navigation
+- [x] Remove category cards section from Home page (causing confusion)
+- [x] Fix mobile responsive layout on Business page
+- [x] Remove category image cards from Business page header section
+- [x] Add category cards back to Home page with even/equal card sizes
+- [x] URGENT: Remove category image cards still showing on Business page after publish
+- [x] Remove "since 2025" text from footer
+- [x] Update Global Sourcing description to "Strategic partnerships across continents ensuring reliable supplies."
+- [x] Update Competitive Pricing description to "Access to current market intelligence to provide the most competitive pricing."
+- [x] Fix mobile responsive layout on Specifications page
+- [x] URGENT: Fix Specifications page tabs - cannot scroll/move on mobile
+- [x] URGENT: Fix Specifications page table format for mobile responsive
+- [x] Fix footer Business link - not working
+- [x] Fix footer Business links - work first time but subsequent clicks don't work when on Business page
+- [ ] Verify all navigation links are working correctly
+- [x] Remove Business Categories section from mobile hamburger menu (redundant)
+- [x] Update Specifications page with data from Spec-1.xlsx
+- [x] Add missing Edible Oil CP10 specifications
+- [x] Add complete Coal specifications with actual ADB/ARB values
+- [x] Add all 11 rice varieties (Jasmine, Japonica, Dai Thom 8, OM 5451, 504, Glutinous, Emata, IRRI 6, Swarna, IR64, Thai Hom Mali)
+- [x] Add downloadable PDF spec sheets for each commodity with company branding
+- [x] Change HK office label to "Registered Office"
+- [x] Change Singapore label to "Headquarter"
