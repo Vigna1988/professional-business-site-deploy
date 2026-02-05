@@ -25,4 +25,37 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// TODO: Add your tables here
+/**
+ * Quote requests table for tracking customer quote inquiries.
+ * Stores commodity type, quantity, delivery timeline, and contact information.
+ */
+export const quoteRequests = mysqlTable("quoteRequests", {
+  id: int("id").autoincrement().primaryKey(),
+  /** Customer name */
+  name: varchar("name", { length: 255 }).notNull(),
+  /** Customer email for follow-up */
+  email: varchar("email", { length: 320 }).notNull(),
+  /** Customer phone number */
+  phone: varchar("phone", { length: 20 }).notNull(),
+  /** Company name */
+  company: varchar("company", { length: 255 }),
+  /** Type of commodity (Rice, Sugar, Coal, Oil, Poultry, etc.) */
+  commodityType: varchar("commodityType", { length: 100 }).notNull(),
+  /** Quantity requested */
+  quantity: varchar("quantity", { length: 100 }).notNull(),
+  /** Unit of measurement (tons, barrels, etc.) */
+  unit: varchar("unit", { length: 50 }).notNull(),
+  /** Desired delivery timeline */
+  deliveryTimeline: varchar("deliveryTimeline", { length: 100 }).notNull(),
+  /** Additional notes or special requirements */
+  notes: text("notes"),
+  /** Status of the quote request (new, contacted, quoted, closed) */
+  status: mysqlEnum("status", ["new", "contacted", "quoted", "closed"]).default("new").notNull(),
+  /** Timestamp when the quote was created */
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  /** Timestamp when the quote was last updated */
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type QuoteRequest = typeof quoteRequests.$inferSelect;
+export type InsertQuoteRequest = typeof quoteRequests.$inferInsert;

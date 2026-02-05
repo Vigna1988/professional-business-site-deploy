@@ -8,6 +8,13 @@
       "when": 1764854448973,
       "tag": "0000_wakeful_sheva_callister",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1770268606619,
+      "tag": "0001_giant_shadow_king",
+      "breakpoints": true
     }
   ]
 }

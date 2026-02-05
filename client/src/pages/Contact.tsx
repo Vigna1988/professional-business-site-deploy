@@ -1,4 +1,3 @@
-import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,6 +6,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { MapView } from "@/components/Map";
 import { useRef } from "react";
+import RequestQuoteForm from "@/components/RequestQuoteForm";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Layout from "@/components/Layout";
 
 export default function Contact() {
   const { register, handleSubmit, reset, formState: { isSubmitting } } = useForm();
@@ -95,63 +97,75 @@ export default function Contact() {
                     <p className="text-sm text-muted-foreground mt-1">We reply within 24 hours.</p>
                   </div>
                 </div>
-
-
               </div>
             </div>
 
-            {/* Contact Form */}
-            <div className="bg-card p-8 md:p-10 rounded-sm shadow-lg border border-border">
-              <h3 className="text-2xl font-heading font-bold mb-6">Send a Message</h3>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Name *</label>
-                    <Input 
-                      {...register("name", { required: true })} 
-                      placeholder="Your Name" 
-                      className="bg-background"
-                    />
-                  </div>
+            {/* Tabbed Forms */}
+            <div>
+              <Tabs defaultValue="message" className="w-full">
+                <TabsList className="grid w-full grid-cols-2 mb-6">
+                  <TabsTrigger value="message">Send Message</TabsTrigger>
+                  <TabsTrigger value="quote">Request Quote</TabsTrigger>
+                </TabsList>
 
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Email *</label>
-                  <Input 
-                    {...register("email", { required: true, pattern: /^\S+@\S+$/i })} 
-                    placeholder="your@email.com" 
-                    type="email"
-                    className="bg-background"
-                  />
-                </div>
+                {/* Message Tab */}
+                <TabsContent value="message" className="bg-card p-8 md:p-10 rounded-sm shadow-lg border border-border">
+                  <h3 className="text-2xl font-heading font-bold mb-6">Send a Message</h3>
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Name *</label>
+                        <Input 
+                          {...register("name", { required: true })} 
+                          placeholder="Your Name" 
+                          className="bg-background"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Email *</label>
+                      <Input 
+                        {...register("email", { required: true, pattern: /^\S+@\S+$/i })} 
+                        placeholder="your@email.com" 
+                        type="email"
+                        className="bg-background"
+                      />
+                    </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Subject *</label>
-                  <Input 
-                    {...register("subject", { required: true })} 
-                    placeholder="Inquiry about..." 
-                    className="bg-background"
-                  />
-                </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Subject *</label>
+                      <Input 
+                        {...register("subject", { required: true })} 
+                        placeholder="Inquiry about..." 
+                        className="bg-background"
+                      />
+                    </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Message *</label>
-                  <Textarea 
-                    {...register("message", { required: true })} 
-                    placeholder="How can we help you?" 
-                    className="min-h-[150px] bg-background"
-                  />
-                </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Message *</label>
+                      <Textarea 
+                        {...register("message", { required: true })} 
+                        placeholder="How can we help you?" 
+                        className="min-h-[150px] bg-background"
+                      />
+                    </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-heading tracking-wide py-6 text-lg"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Sending..." : "SEND MESSAGE"}
-                </Button>
-              </form>
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-heading tracking-wide py-6 text-lg"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Sending..." : "SEND MESSAGE"}
+                    </Button>
+                  </form>
+                </TabsContent>
+
+                {/* Quote Tab */}
+                <TabsContent value="quote">
+                  <RequestQuoteForm />
+                </TabsContent>
+              </Tabs>
             </div>
           </div>
         </div>
