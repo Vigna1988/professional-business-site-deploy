@@ -68,7 +68,7 @@ export default function Business() {
       description: "Our oil trading division specializes in the sourcing, marketing, and distribution of refined petroleum products and crude oil to clients across global energy markets. With a strong network of producers, refineries, and logistics partners, we ensure a reliable supply chain that delivers energy solutions with consistency, transparency, and competitive pricing. We trade a wide range of products—including crude oil, diesel, fuel oil, gasoline, lubricants, and specialty petrochemicals.",
       items: [
         { name: "Petroleum Products", image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663306370278/WCILRjMPUanOzvJd.jpg", desc: "Trading of crude oil and refined petroleum products to meet global energy demands." },
-        { name: "Fuel Oil", image: "/images/fuel-oil.jpg", desc: "Industrial fuel oil for power plants and shipping vessels." }
+        { name: "Fuel Oil", image: "https://images.unsplash.com/photo-1532996122724-8f3c2cd83c5d?auto=format&fit=crop&q=80&w=800", desc: "Industrial fuel oil for power plants and shipping vessels." }
       ]
     },
     {
