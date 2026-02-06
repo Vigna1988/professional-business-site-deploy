@@ -4,13 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, MapPin, Phone, Mail, Facebook, Linkedin, Twitter } from "lucide-react";
 import { useState, useEffect } from "react";
 import ChatWidget from "@/components/ChatWidget";
-import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +24,6 @@ const navItems = [
   { name: "Businesses", path: "/business" },
   { name: "Specifications", path: "/specifications" },
   { name: "Contact", path: "/contact" },
-  ...(user ? [{ name: "Dashboard", path: "/dashboard" }] : []),
 ];
 
   return (

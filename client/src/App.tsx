@@ -9,7 +9,6 @@ import About from "./pages/About";
 import Business from "./pages/Business";
 import Contact from "./pages/Contact";
 import Specifications from "./pages/Specifications";
-import CustomerDashboard from "./pages/CustomerDashboard";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -19,7 +18,6 @@ function Router() {
       <Route path="/business" component={Business} />
       <Route path="/contact" component={Contact} />
       <Route path="/specifications" component={Specifications} />
-      <Route path="/dashboard" component={CustomerDashboard} />
       <Route component={NotFound} />
     </Switch>
   );
