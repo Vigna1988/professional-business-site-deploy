@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, InsertQuoteRequest, quoteRequests } from "../drizzle/schema";
+import { InsertUser, users, InsertQuoteRequest, quoteRequests, InsertCustomerAccount, customerAccounts } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,6 +89,38 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
+export async function createCustomerAccount(account: InsertCustomerAccount) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create customer account: database not available");
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db.insert(customerAccounts).values(account);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to create customer account:", error);
+    throw error;
+  }
+}
+
+export async function getCustomerAccountByUserId(userId: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get customer account: database not available");
+    return undefined;
+  }
+
+  try {
+    const result = await db.select().from(customerAccounts).where(eq(customerAccounts.userId, userId)).limit(1);
+    return result.length > 0 ? result[0] : undefined;
+  } catch (error) {
+    console.error("[Database] Failed to get customer account:", error);
+    return undefined;
+  }
+}
+
 export async function createQuoteRequest(quote: InsertQuoteRequest) {
   const db = await getDb();
   if (!db) {
@@ -118,5 +150,37 @@ export async function getQuoteRequests() {
   } catch (error) {
     console.error("[Database] Failed to get quote requests:", error);
     return [];
+  }
+}
+
+export async function getQuoteRequestsByCustomerId(customerId: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get customer quotes: database not available");
+    return [];
+  }
+
+  try {
+    const result = await db.select().from(quoteRequests).where(eq(quoteRequests.customerId, customerId));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get customer quotes:", error);
+    return [];
+  }
+}
+
+export async function updateQuoteRequest(quoteId: number, updates: Partial<InsertQuoteRequest>) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot update quote request: database not available");
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db.update(quoteRequests).set(updates).where(eq(quoteRequests.id, quoteId));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to update quote request:", error);
+    throw error;
   }
 }
