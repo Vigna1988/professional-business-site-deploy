@@ -125,7 +125,7 @@ export async function sendCustomerConfirmation(
             
             <div class="contact-info">
               <p><strong>Need to Reach Us?</strong></p>
-              <p><strong>Email:</strong> jericho.ang@theharvestman.com</p>
+              <p><strong>Email:</strong> admin@theharvestman.com</p>
               <p><strong>Website:</strong> www.theharvestman.com</p>
               <p>We look forward to serving you!</p>
             </div>

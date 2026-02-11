@@ -52,3 +52,4 @@
 - [x] Test email functionality and verify delivery
 - [x] Update email templates with Harvest Commodities branding
 - [x] Remove all Manus references from email templates
+- [x] Update contact email from jericho.ang@theharvestman.com to admin@theharvestman.com

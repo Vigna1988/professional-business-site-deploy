@@ -126,7 +126,7 @@ export function generateCommodityPDF(
     doc.setTextColor(...brownColor);
     doc.setFont('helvetica', 'normal');
     doc.text('Unit 2A, 17F, Glenealy Tower, No.1 Glenealy Central, Hong Kong', 105, 285, { align: 'center' });
-    doc.text('Email: jericho.ang@theharvestman.com', 105, 290, { align: 'center' });
+    doc.text('Email: admin@theharvestman.com', 105, 290, { align: 'center' });
     
     // Page number
     doc.setFontSize(8);

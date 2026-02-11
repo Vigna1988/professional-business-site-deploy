@@ -91,8 +91,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-bold text-xl mb-2">Email Us</h4>
-                    <a href="mailto:jericho.ang@theharvestman.com" className="text-muted-foreground hover:text-primary transition-colors">
-                      jericho.ang@theharvestman.com
+                    <a href="mailto:admin@theharvestman.com" className="text-muted-foreground hover:text-primary transition-colors">
+                      admin@theharvestman.com
                     </a>
                     <p className="text-sm text-muted-foreground mt-1">We reply within 24 hours.</p>
                   </div>

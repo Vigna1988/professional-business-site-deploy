@@ -159,7 +159,7 @@ const navItems = [
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary shrink-0" />
-                <a href="mailto:jericho.ang@theharvestman.com" className="hover:text-primary transition-colors">jericho.ang@theharvestman.com</a>
+                <a href="mailto:admin@theharvestman.com" className="hover:text-primary transition-colors">admin@theharvestman.com</a>
               </li>
 
             </ul>

@@ -89,7 +89,7 @@ export default function ChatWidget() {
         let response = "Thank you for your message. Our team will get back to you shortly.";
         
         if (displayText.toLowerCase().includes("price") || displayText.toLowerCase().includes("quote")) {
-          response = "For current commodity prices and quotes, please email our trading desk at jericho.ang@theharvestman.com.";
+          response = "For current commodity prices and quotes, please email our trading desk at admin@theharvestman.com.";
         } else if (displayText.toLowerCase().includes("rice") || displayText.toLowerCase().includes("sugar")) {
           response = "We offer premium grades of Rice and Sugar. Would you like to see our product specifications?";
         }
