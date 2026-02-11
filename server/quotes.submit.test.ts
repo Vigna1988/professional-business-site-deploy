@@ -47,10 +47,13 @@ describe("quotes.submit", () => {
 
     const result = await caller.quotes.submit(quoteData);
 
-    expect(result).toEqual({
-      success: true,
-      message: "Quote request submitted successfully. We will contact you soon.",
-    });
+    expect(result.success).toBe(true);
+    expect(result.message).toBe("Quote request submitted successfully. We will contact you soon.");
+    expect(result.referenceNumber).toBeDefined();
+    expect(result.referenceNumber).toMatch(/^HC-\d+-[A-Z0-9]{6}$/);
+    expect(result.emailsSent).toBeDefined();
+    expect(result.emailsSent.customer).toBe(true);
+    expect(result.emailsSent.admin).toBe(true);
   });
 
   it("should reject quote with missing required fields", async () => {
@@ -138,9 +141,11 @@ describe("quotes.submit", () => {
 
     const result = await caller.quotes.submit(quoteData as any);
 
-    expect(result).toEqual({
-      success: true,
-      message: "Quote request submitted successfully. We will contact you soon.",
-    });
+    expect(result.success).toBe(true);
+    expect(result.message).toBe("Quote request submitted successfully. We will contact you soon.");
+    expect(result.referenceNumber).toBeDefined();
+    expect(result.emailsSent).toBeDefined();
+    expect(result.emailsSent.customer).toBe(true);
+    expect(result.emailsSent.admin).toBe(true);
   });
 });

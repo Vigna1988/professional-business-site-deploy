@@ -15,6 +15,8 @@ import {
   unblockIP
 } from "./security/contentFilter";
 import { TRPCError } from "@trpc/server";
+import { sendCustomerConfirmation, sendAdminNotification } from "./email/emailService";
+import { nanoid } from "nanoid";
 
 export const appRouter = router({
   system: systemRouter,
@@ -159,6 +161,9 @@ export const appRouter = router({
             });
           }
 
+          // Generate unique reference number
+          const referenceNumber = `HC-${Date.now()}-${nanoid(6).toUpperCase()}`;
+
           await createQuoteRequest({
             name: input.name,
             email: input.email,
@@ -172,15 +177,44 @@ export const appRouter = router({
             status: "new",
           });
 
+          // Send confirmation email to customer
+          const customerEmailSent = await sendCustomerConfirmation(
+            input.email,
+            input.name,
+            input.commodityType,
+            input.quantity,
+            input.unit,
+            referenceNumber
+          );
+
+          // Send notification email to admin
+          const adminEmailSent = await sendAdminNotification(
+            input.name,
+            input.email,
+            input.phone,
+            input.company,
+            input.commodityType,
+            input.quantity,
+            input.unit,
+            input.deliveryTimeline,
+            input.notes,
+            referenceNumber
+          );
+
           // Notify owner of new quote request
           await notifyOwner({
             title: "New Quote Request",
-            content: `New quote request from ${input.name} (${input.email})\n\nCommodity: ${input.commodityType}\nQuantity: ${input.quantity} ${input.unit}\nDelivery: ${input.deliveryTimeline}`,
+            content: `New quote request from ${input.name} (${input.email})\n\nReference: ${referenceNumber}\nCommodity: ${input.commodityType}\nQuantity: ${input.quantity} ${input.unit}\nDelivery: ${input.deliveryTimeline}`,
           });
 
           return {
             success: true,
             message: "Quote request submitted successfully. We will contact you soon.",
+            referenceNumber,
+            emailsSent: {
+              customer: customerEmailSent,
+              admin: adminEmailSent,
+            },
           };
         } catch (error) {
           console.error("Failed to submit quote request:", error);

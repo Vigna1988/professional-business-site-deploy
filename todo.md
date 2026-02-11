@@ -46,3 +46,7 @@
 - [x] Fix unit of measurement alignment in Request Quote form
 - [x] Fix Select component context error in Request Quote form
 - [x] Fix Quantity and Unit of Measurement field alignment in Request Quote form
+- [x] Set up SMTP email service with Gmail App Password credentials
+- [x] Create email templates for customer confirmation and admin notification
+- [x] Integrate email sending into quote submission flow
+- [x] Test email functionality and verify delivery
