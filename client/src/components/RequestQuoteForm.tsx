@@ -2,14 +2,21 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { toast } from "sonner";
-import { trpc } from "@/lib/trpc";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const quoteFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -26,26 +33,26 @@ const quoteFormSchema = z.object({
 type QuoteFormValues = z.infer<typeof quoteFormSchema>;
 
 const COMMODITY_OPTIONS = [
-  { value: "Rice", label: "Rice" },
-  { value: "Corn", label: "Corn" },
-  { value: "Wheat", label: "Wheat" },
-  { value: "Sugar", label: "Sugar" },
-  { value: "Edible Oil", label: "Edible Oil" },
-  { value: "Thermal Coal", label: "Thermal Coal" },
-  { value: "Coking Coal", label: "Coking Coal" },
-  { value: "Crude Oil", label: "Crude Oil" },
-  { value: "Petroleum Products", label: "Petroleum Products" },
-  { value: "Fuel Oil", label: "Fuel Oil" },
-  { value: "Frozen Poultry", label: "Frozen Poultry" },
-  { value: "Beef & Pork", label: "Beef & Pork" },
+  { value: "rice", label: "Rice" },
+  { value: "sugar", label: "Sugar" },
+  { value: "coal", label: "Coal" },
+  { value: "crude-oil", label: "Crude Oil" },
+  { value: "diesel", label: "Diesel" },
+  { value: "fuel-oil", label: "Fuel Oil" },
+  { value: "gasoline", label: "Gasoline" },
+  { value: "lubricants", label: "Lubricants" },
+  { value: "petrochemicals", label: "Specialty Petrochemicals" },
+  { value: "beef", label: "Beef" },
+  { value: "chicken", label: "Chicken" },
+  { value: "pork", label: "Pork" },
 ];
 
 const UNIT_OPTIONS = [
-  { value: "tons", label: "Metric Tons" },
-  { value: "barrels", label: "Barrels" },
-  { value: "liters", label: "Liters" },
-  { value: "kg", label: "Kilograms" },
-  { value: "units", label: "Units" },
+  { value: "tons", label: "Metric Tons (MT)" },
+  { value: "barrels", label: "Barrels (BBL)" },
+  { value: "liters", label: "Liters (L)" },
+  { value: "kg", label: "Kilograms (KG)" },
+  { value: "lbs", label: "Pounds (LBS)" },
 ];
 
 const TIMELINE_OPTIONS = [
@@ -176,20 +183,19 @@ export default function RequestQuoteForm() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Commodity Type *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a commodity" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      >
+                        <option value="">Select a commodity</option>
                         {COMMODITY_OPTIONS.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
+                          <option key={option.value} value={option.value}>
                             {option.label}
-                          </SelectItem>
+                          </option>
                         ))}
-                      </SelectContent>
-                    </Select>
+                      </select>
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -220,20 +226,18 @@ export default function RequestQuoteForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Unit of Measurement *</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select unit" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
+                        <FormControl>
+                          <select
+                            {...field}
+                            className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                          >
                             {UNIT_OPTIONS.map((option) => (
-                              <SelectItem key={option.value} value={option.value}>
+                              <option key={option.value} value={option.value}>
                                 {option.label}
-                              </SelectItem>
+                              </option>
                             ))}
-                          </SelectContent>
-                        </Select>
+                          </select>
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -252,20 +256,19 @@ export default function RequestQuoteForm() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Desired Delivery Timeline *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select delivery timeline" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      >
+                        <option value="">Select delivery timeline</option>
                         {TIMELINE_OPTIONS.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
+                          <option key={option.value} value={option.value}>
                             {option.label}
-                          </SelectItem>
+                          </option>
                         ))}
-                      </SelectContent>
-                    </Select>
+                      </select>
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}

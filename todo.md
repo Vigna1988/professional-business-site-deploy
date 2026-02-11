@@ -44,3 +44,4 @@
 - [x] Add admin moderation tools for chat messages
 - [x] Implement comprehensive security audit logging
 - [x] Fix unit of measurement alignment in Request Quote form
+- [x] Fix Select component context error in Request Quote form
