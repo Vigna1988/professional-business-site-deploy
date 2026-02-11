@@ -195,46 +195,50 @@ export default function RequestQuoteForm() {
                 )}
               />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="quantity"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Quantity *</FormLabel>
-                      <FormControl>
-                        <Input type="number" placeholder="1000" {...field} />
-                      </FormControl>
-                      <FormDescription>Enter the quantity needed</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="unit"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Unit of Measurement *</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <div className="md:col-span-1">
+                  <FormField
+                    control={form.control}
+                    name="quantity"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Quantity *</FormLabel>
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select unit" />
-                          </SelectTrigger>
+                          <Input type="number" placeholder="1000" {...field} />
                         </FormControl>
-                        <SelectContent>
-                          {UNIT_OPTIONS.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                        <FormDescription>Enter the quantity needed</FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="md:col-span-1">
+                  <FormField
+                    control={form.control}
+                    name="unit"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Unit of Measurement *</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select unit" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {UNIT_OPTIONS.map((option) => (
+                              <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
             </div>
 

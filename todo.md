@@ -43,3 +43,4 @@
 - [x] Create user reputation system to prevent abuse
 - [x] Add admin moderation tools for chat messages
 - [x] Implement comprehensive security audit logging
+- [x] Fix unit of measurement alignment in Request Quote form
