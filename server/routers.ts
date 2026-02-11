@@ -5,7 +5,16 @@ import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { createQuoteRequest, getQuoteRequests } from "./db";
 import { notifyOwner } from "./_core/notification";
-import { validateMessageContent, checkRateLimit, validateUrl, cleanupRateLimits } from "./security/contentFilter";
+import { 
+  validateMessageContent, 
+  checkRateLimit, 
+  validateUrl, 
+  cleanupRateLimits,
+  getIPReputation,
+  blockIP,
+  unblockIP
+} from "./security/contentFilter";
+import { TRPCError } from "@trpc/server";
 
 export const appRouter = router({
   system: systemRouter,
@@ -25,11 +34,29 @@ export const appRouter = router({
       .input(z.object({
         content: z.string().min(1).max(1000),
         userId: z.string().optional(),
+        ipAddress: z.string().optional(),
       }))
-      .mutation(({ input }) => {
+      .mutation(({ input, ctx }) => {
+        // Extract IP address from request
+        const ipAddress = input.ipAddress || (ctx.req.headers["x-forwarded-for"] as string)?.split(",")[0] || 
+                         ctx.req.socket?.remoteAddress || "unknown";
+
+        // Check IP reputation
+        const ipRep = getIPReputation(ipAddress);
+        if (ipRep?.blocked) {
+          return {
+            isValid: false,
+            message: "Your IP address has been temporarily blocked due to suspicious activity. Please try again later.",
+            violations: ["IP blocked"],
+            sanitized: "",
+            remainingMessages: 0,
+            blocked: true,
+          };
+        }
+
         // Check rate limiting
         const userId = input.userId || "anonymous";
-        const rateLimitCheck = checkRateLimit(userId);
+        const rateLimitCheck = checkRateLimit(userId, ipAddress);
         
         if (!rateLimitCheck.allowed) {
           return {
@@ -37,6 +64,8 @@ export const appRouter = router({
             message: `Too many messages. Please wait ${Math.ceil((rateLimitCheck.resetTime - Date.now()) / 1000)} seconds.`,
             violations: ["Rate limit exceeded"],
             sanitized: "",
+            remainingMessages: 0,
+            blocked: rateLimitCheck.blocked,
           };
         }
 
@@ -48,6 +77,11 @@ export const appRouter = router({
           cleanupRateLimits();
         }
 
+        // If message contains violations, record it for IP reputation
+        if (!validation.isValid && ipAddress !== "unknown") {
+          // Increment violation count for this IP (handled in checkRateLimit)
+        }
+
         return {
           isValid: validation.isValid,
           message: validation.isValid 
@@ -56,6 +90,7 @@ export const appRouter = router({
           violations: validation.violations,
           sanitized: validation.sanitized,
           remainingMessages: rateLimitCheck.remainingMessages,
+          blocked: false,
         };
       }),
 
@@ -65,6 +100,35 @@ export const appRouter = router({
       }))
       .query(({ input }) => {
         return validateUrl(input.url);
+      }),
+
+    // Admin endpoints for IP management
+    blockIP: publicProcedure
+      .input(z.object({
+        ipAddress: z.string(),
+        duration: z.number().optional(),
+      }))
+      .mutation(({ input }) => {
+        blockIP(input.ipAddress, input.duration);
+        return { success: true, message: `IP ${input.ipAddress} has been blocked` };
+      }),
+
+    unblockIP: publicProcedure
+      .input(z.object({
+        ipAddress: z.string(),
+      }))
+      .mutation(({ input }) => {
+        unblockIP(input.ipAddress);
+        return { success: true, message: `IP ${input.ipAddress} has been unblocked` };
+      }),
+
+    getIPReputation: publicProcedure
+      .input(z.object({
+        ipAddress: z.string(),
+      }))
+      .query(({ input }) => {
+        const rep = getIPReputation(input.ipAddress);
+        return rep || { violations: 0, lastViolation: 0, blocked: false };
       }),
   }),
 
@@ -83,6 +147,18 @@ export const appRouter = router({
       }))
       .mutation(async ({ input }) => {
         try {
+          // Validate input content for security
+          const nameValidation = validateMessageContent(input.name);
+          const emailValidation = validateMessageContent(input.email);
+          const notesValidation = input.notes ? validateMessageContent(input.notes) : { isValid: true, violations: [] };
+
+          if (!nameValidation.isValid || !emailValidation.isValid || !notesValidation.isValid) {
+            throw new TRPCError({
+              code: "BAD_REQUEST",
+              message: "Quote request contains inappropriate content",
+            });
+          }
+
           await createQuoteRequest({
             name: input.name,
             email: input.email,
@@ -108,7 +184,10 @@ export const appRouter = router({
           };
         } catch (error) {
           console.error("Failed to submit quote request:", error);
-          throw new Error("Failed to submit quote request. Please try again.");
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Failed to submit quote request. Please try again.",
+          });
         }
       }),
 

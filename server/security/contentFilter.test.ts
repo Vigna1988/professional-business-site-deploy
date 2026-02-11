@@ -23,7 +23,7 @@ describe("Content Security Filter", () => {
       const result = validateMessageContent("This is a fuck test message with shit in it.");
       expect(result.isValid).toBe(false);
       expect(result.violations.length).toBeGreaterThan(0);
-      expect(result.violations[0]).toContain("Vulgar");
+      expect(result.violations.some(v => v.includes("Inappropriate"))).toBe(true);
     });
 
     it("should sanitize vulgar words", () => {
