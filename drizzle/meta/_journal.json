@@ -15,6 +15,20 @@
       "when": 1770268606619,
       "tag": "0001_giant_shadow_king",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1770356777700,
+      "tag": "0002_married_stellaris",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1770358712365,
+      "tag": "0003_petite_redwing",
+      "breakpoints": true
     }
   ]
 }

@@ -28,3 +28,10 @@
 - [x] Add downloadable PDF spec sheets for each commodity with company branding
 - [x] Change HK office label to "Registered Office"
 - [x] Change Singapore label to "Headquarter"
+- [x] Implement content filtering utility for spam and vulgarity detection
+- [x] Add URL validation and malicious link detection
+- [x] Add rate limiting to prevent spam
+- [x] Create backend security middleware for message validation
+- [x] Add frontend input sanitization and validation
+- [x] Write unit tests for security features
+- [x] Test security filters with various attack vectors

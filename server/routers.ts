@@ -5,9 +5,9 @@ import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { createQuoteRequest, getQuoteRequests } from "./db";
 import { notifyOwner } from "./_core/notification";
+import { validateMessageContent, checkRateLimit, validateUrl, cleanupRateLimits } from "./security/contentFilter";
 
 export const appRouter = router({
-    // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
@@ -18,6 +18,54 @@ export const appRouter = router({
         success: true,
       } as const;
     }),
+  }),
+
+  chat: router({
+    validateMessage: publicProcedure
+      .input(z.object({
+        content: z.string().min(1).max(1000),
+        userId: z.string().optional(),
+      }))
+      .mutation(({ input }) => {
+        // Check rate limiting
+        const userId = input.userId || "anonymous";
+        const rateLimitCheck = checkRateLimit(userId);
+        
+        if (!rateLimitCheck.allowed) {
+          return {
+            isValid: false,
+            message: `Too many messages. Please wait ${Math.ceil((rateLimitCheck.resetTime - Date.now()) / 1000)} seconds.`,
+            violations: ["Rate limit exceeded"],
+            sanitized: "",
+          };
+        }
+
+        // Validate message content
+        const validation = validateMessageContent(input.content);
+        
+        // Clean up old rate limit entries periodically
+        if (Math.random() < 0.1) {
+          cleanupRateLimits();
+        }
+
+        return {
+          isValid: validation.isValid,
+          message: validation.isValid 
+            ? "Message passed security checks" 
+            : `Message validation failed: ${validation.violations.join("; ")}`,
+          violations: validation.violations,
+          sanitized: validation.sanitized,
+          remainingMessages: rateLimitCheck.remainingMessages,
+        };
+      }),
+
+    validateUrl: publicProcedure
+      .input(z.object({
+        url: z.string().url(),
+      }))
+      .query(({ input }) => {
+        return validateUrl(input.url);
+      }),
   }),
 
   quotes: router({

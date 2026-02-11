@@ -2,16 +2,28 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageCircle, X, Send, Minimize2 } from "lucide-react";
+import { MessageCircle, X, Send, Minimize2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
+
+interface ChatMessage {
+  text: string;
+  isUser: boolean;
+  isBlocked?: boolean;
+}
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>([
     { text: "Hello! Welcome to Harvest Commodities. How can we help you today?", isUser: false }
   ]);
   const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [remainingMessages, setRemainingMessages] = useState(10);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const validateMessageMutation = trpc.chat.validateMessage.useMutation();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -21,27 +33,76 @@ export default function ChatWidget() {
     scrollToBottom();
   }, [messages, isOpen]);
 
-  const handleSendMessage = (e?: React.FormEvent) => {
+  const handleSendMessage = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!inputValue.trim()) return;
 
-    // Add user message
-    setMessages(prev => [...prev, { text: inputValue, isUser: true }]);
-    const userText = inputValue;
-    setInputValue("");
+    setIsLoading(true);
 
-    // Simulate bot response
-    setTimeout(() => {
-      let response = "Thank you for your message. Our team will get back to you shortly.";
-      
-      if (userText.toLowerCase().includes("price") || userText.toLowerCase().includes("quote")) {
-        response = "For current commodity prices and quotes, please email our trading desk at jericho.ang@theharvestman.com.";
-      } else if (userText.toLowerCase().includes("rice") || userText.toLowerCase().includes("sugar")) {
-        response = "We offer premium grades of Rice and Sugar. Would you like to see our product specifications?";
+    try {
+      // Validate message on backend
+      const validation = await validateMessageMutation.mutateAsync({
+        content: inputValue,
+        userId: "chat-user",
+      });
+
+      if (!validation.isValid) {
+        // Show blocked message
+        setMessages(prev => [...prev, { 
+          text: inputValue, 
+          isUser: true,
+          isBlocked: true
+        }]);
+        
+        // Show error message
+        const errorMessage = validation.violations.length > 0 
+          ? `Message blocked: ${validation.violations[0]}`
+          : "Message failed security checks";
+        
+        setMessages(prev => [...prev, { 
+          text: `⚠️ ${errorMessage}`, 
+          isUser: false,
+          isBlocked: true
+        }]);
+        
+        toast.error(errorMessage);
+        setInputValue("");
+        setRemainingMessages(validation.remainingMessages || 0);
+        setIsLoading(false);
+        return;
       }
 
-      setMessages(prev => [...prev, { text: response, isUser: false }]);
-    }, 1000);
+      // Update remaining messages
+      if (validation.remainingMessages !== undefined) {
+        setRemainingMessages(validation.remainingMessages);
+      }
+
+      // Use sanitized content if available
+      const displayText = validation.sanitized || inputValue;
+
+      // Add user message
+      setMessages(prev => [...prev, { text: displayText, isUser: true }]);
+      setInputValue("");
+
+      // Simulate bot response
+      setTimeout(() => {
+        let response = "Thank you for your message. Our team will get back to you shortly.";
+        
+        if (displayText.toLowerCase().includes("price") || displayText.toLowerCase().includes("quote")) {
+          response = "For current commodity prices and quotes, please email our trading desk at jericho.ang@theharvestman.com.";
+        } else if (displayText.toLowerCase().includes("rice") || displayText.toLowerCase().includes("sugar")) {
+          response = "We offer premium grades of Rice and Sugar. Would you like to see our product specifications?";
+        }
+
+        setMessages(prev => [...prev, { text: response, isUser: false }]);
+      }, 1000);
+    } catch (error) {
+      console.error("Message validation error:", error);
+      toast.error("Failed to send message. Please try again.");
+      setInputValue("");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -90,17 +151,27 @@ export default function ChatWidget() {
                   <div 
                     className={cn(
                       "max-w-[80%] rounded-2xl px-4 py-2.5 text-sm shadow-sm",
-                      msg.isUser 
-                        ? "bg-primary text-primary-foreground rounded-br-none" 
-                        : "bg-secondary text-secondary-foreground rounded-bl-none border border-border"
+                      msg.isBlocked
+                        ? "bg-red-100 text-red-900 border border-red-300 rounded-bl-none"
+                        : msg.isUser 
+                          ? "bg-primary text-primary-foreground rounded-br-none" 
+                          : "bg-secondary text-secondary-foreground rounded-bl-none border border-border"
                     )}
                   >
+                    {msg.isBlocked && <AlertCircle className="h-4 w-4 inline mr-2" />}
                     {msg.text}
                   </div>
                 </div>
               ))}
               <div ref={messagesEndRef} />
             </div>
+
+            {/* Rate Limit Warning */}
+            {remainingMessages < 3 && remainingMessages > 0 && (
+              <div className="px-4 py-2 bg-yellow-50 border-t border-yellow-200 text-xs text-yellow-800">
+                {remainingMessages} message{remainingMessages !== 1 ? 's' : ''} remaining this minute
+              </div>
+            )}
 
             {/* Input Area */}
             <div className="p-4 border-t border-border bg-card">
@@ -110,8 +181,15 @@ export default function ChatWidget() {
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder="Type a message..." 
                   className="flex-1 bg-background focus-visible:ring-primary"
+                  disabled={isLoading || remainingMessages === 0}
+                  maxLength={1000}
                 />
-                <Button type="submit" size="icon" className="bg-primary text-primary-foreground hover:bg-primary/90 shrink-0">
+                <Button 
+                  type="submit" 
+                  size="icon" 
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 shrink-0"
+                  disabled={isLoading || remainingMessages === 0}
+                >
                   <Send className="h-4 w-4" />
                 </Button>
               </form>
