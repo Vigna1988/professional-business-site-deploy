@@ -59,55 +59,84 @@ export async function sendCustomerConfirmation(
     <!DOCTYPE html>
     <html>
       <head>
+        <meta charset="UTF-8">
         <style>
-          body { font-family: Arial, sans-serif; color: #333; }
-          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-          .header { background-color: #b8860b; color: white; padding: 20px; text-align: center; border-radius: 5px; }
-          .content { padding: 20px; background-color: #f9f9f9; margin-top: 20px; border-radius: 5px; }
-          .details { margin: 15px 0; }
-          .detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #ddd; }
-          .label { font-weight: bold; }
-          .footer { text-align: center; margin-top: 20px; color: #666; font-size: 12px; }
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; background-color: #f5f5f5; }
+          .container { max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+          .header { background: linear-gradient(135deg, #b8860b 0%, #8b6914 100%); color: white; padding: 30px 20px; text-align: center; }
+          .logo { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+          .header h1 { font-size: 28px; margin-top: 10px; }
+          .content { padding: 30px 20px; }
+          .greeting { font-size: 16px; margin-bottom: 20px; line-height: 1.6; }
+          .reference-box { background-color: #f9f9f9; border-left: 4px solid #b8860b; padding: 15px; margin: 20px 0; border-radius: 3px; }
+          .reference-box .label { font-weight: bold; color: #666; font-size: 12px; text-transform: uppercase; }
+          .reference-box .value { font-size: 18px; font-weight: bold; color: #b8860b; margin-top: 5px; font-family: monospace; }
+          .details { margin: 25px 0; }
+          .detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
+          .detail-row:last-child { border-bottom: none; }
+          .detail-label { font-weight: 600; color: #555; width: 40%; }
+          .detail-value { color: #333; width: 60%; text-align: right; }
+          .info-box { background-color: #f0f8ff; border: 1px solid #b8d4e8; padding: 15px; border-radius: 5px; margin: 20px 0; }
+          .info-box p { margin: 5px 0; font-size: 14px; line-height: 1.5; }
+          .contact-info { background-color: #fafafa; padding: 15px; border-radius: 5px; margin: 20px 0; }
+          .contact-info p { margin: 8px 0; font-size: 14px; }
+          .contact-info strong { color: #b8860b; }
+          .footer { background-color: #f5f5f5; padding: 20px; text-align: center; border-top: 1px solid #eee; font-size: 12px; color: #999; }
+          .footer p { margin: 5px 0; }
+          .divider { height: 1px; background-color: #eee; margin: 20px 0; }
         </style>
       </head>
       <body>
         <div class="container">
           <div class="header">
-            <h1>Quote Request Received</h1>
+            <div class="logo">🌾 HARVEST COMMODITIES</div>
+            <h1>Quote Request Confirmed</h1>
           </div>
+          
           <div class="content">
-            <p>Dear ${customerName},</p>
-            <p>Thank you for submitting your quote request to Harvest Commodities. We have received your inquiry and will get back to you with a competitive quote within 24 hours.</p>
+            <p class="greeting">Dear <strong>${customerName}</strong>,</p>
             
-            <h3>Quote Details</h3>
+            <p>Thank you for choosing Harvest Commodities for your commodity sourcing needs. We have successfully received your quote request and appreciate your interest in our products and services.</p>
+            
+            <div class="reference-box">
+              <div class="label">Your Reference Number</div>
+              <div class="value">${referenceNumber}</div>
+            </div>
+            
+            <p>Please keep this reference number for your records. You can use it to track your quote request and for any future correspondence with our team.</p>
+            
+            <h3 style="color: #b8860b; margin-top: 25px; margin-bottom: 15px;">Quote Details</h3>
             <div class="details">
               <div class="detail-row">
-                <span class="label">Reference Number:</span>
-                <span>${referenceNumber}</span>
+                <span class="detail-label">Commodity Type</span>
+                <span class="detail-value"><strong>${commodityType}</strong></span>
               </div>
               <div class="detail-row">
-                <span class="label">Commodity Type:</span>
-                <span>${commodityType}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Quantity:</span>
-                <span>${quantity} ${unit}</span>
+                <span class="detail-label">Quantity Requested</span>
+                <span class="detail-value"><strong>${quantity} ${unit}</strong></span>
               </div>
             </div>
-
-            <p>Please keep your reference number for future correspondence. Our team will contact you shortly with pricing and availability information.</p>
             
-            <p>If you have any urgent questions, please contact us at:</p>
-            <p>
-              <strong>Email:</strong> jericho.ang@theharvestman.com<br>
-              <strong>Phone:</strong> Available on our website
-            </p>
-
-            <p>Best regards,<br><strong>Harvest Commodities Team</strong></p>
+            <div class="info-box">
+              <p><strong>What Happens Next?</strong></p>
+              <p>Our experienced sourcing team will review your requirements and prepare a competitive quote tailored to your specific needs. We typically respond within 24 hours during business days.</p>
+            </div>
+            
+            <div class="contact-info">
+              <p><strong>Need to Reach Us?</strong></p>
+              <p><strong>Email:</strong> jericho.ang@theharvestman.com</p>
+              <p><strong>Website:</strong> www.theharvestman.com</p>
+              <p>We look forward to serving you!</p>
+            </div>
+            
+            <p style="margin-top: 20px; color: #666; font-size: 14px;">Best regards,<br><strong style="color: #b8860b;">The Harvest Commodities Team</strong></p>
           </div>
+          
           <div class="footer">
-            <p>This is an automated email. Please do not reply directly to this message.</p>
+            <p>This is an automated confirmation email. Please do not reply directly to this message.</p>
             <p>&copy; 2026 Harvest Commodities. All rights reserved.</p>
+            <p>Connecting Global Markets | Premium Commodity Trading</p>
           </div>
         </div>
       </body>
@@ -116,9 +145,9 @@ export async function sendCustomerConfirmation(
 
   return sendEmail({
     to: customerEmail,
-    subject: `Quote Request Confirmation - Reference #${referenceNumber}`,
+    subject: `Quote Request Confirmed - Reference #${referenceNumber}`,
     html,
-    text: `Quote Request Confirmation\n\nDear ${customerName},\n\nThank you for submitting your quote request. Reference Number: ${referenceNumber}\n\nCommodity: ${commodityType}\nQuantity: ${quantity} ${unit}\n\nWe will contact you within 24 hours.`,
+    text: `Quote Request Confirmed\n\nDear ${customerName},\n\nThank you for submitting your quote request to Harvest Commodities.\n\nReference Number: ${referenceNumber}\nCommodity: ${commodityType}\nQuantity: ${quantity} ${unit}\n\nOur team will contact you within 24 hours with a competitive quote.\n\nBest regards,\nHarvest Commodities Team\nwww.theharvestman.com`,
   });
 }
 
@@ -138,80 +167,99 @@ export async function sendAdminNotification(
     <!DOCTYPE html>
     <html>
       <head>
+        <meta charset="UTF-8">
         <style>
-          body { font-family: Arial, sans-serif; color: #333; }
-          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-          .header { background-color: #b8860b; color: white; padding: 20px; text-align: center; border-radius: 5px; }
-          .content { padding: 20px; background-color: #f9f9f9; margin-top: 20px; border-radius: 5px; }
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; background-color: #f5f5f5; }
+          .container { max-width: 700px; margin: 0 auto; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+          .header { background: linear-gradient(135deg, #b8860b 0%, #8b6914 100%); color: white; padding: 25px 20px; text-align: center; }
+          .header h1 { font-size: 24px; }
+          .alert-banner { background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px 20px; color: #856404; font-weight: 600; }
+          .content { padding: 25px 20px; }
           .section { margin: 20px 0; }
-          .section-title { background-color: #e6d5a8; padding: 10px; font-weight: bold; border-radius: 3px; }
-          .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #ddd; }
-          .label { font-weight: bold; width: 40%; }
-          .value { width: 60%; }
-          .footer { text-align: center; margin-top: 20px; color: #666; font-size: 12px; }
+          .section-title { background-color: #e6d5a8; padding: 12px 15px; font-weight: bold; color: #333; border-radius: 3px; margin-bottom: 15px; }
+          .detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+          .detail-row:last-child { border-bottom: none; }
+          .label { font-weight: 600; width: 35%; color: #555; }
+          .value { width: 65%; text-align: right; color: #333; word-break: break-word; }
+          .action-box { background-color: #d4edda; border: 1px solid #c3e6cb; padding: 15px; border-radius: 5px; margin: 20px 0; }
+          .action-box p { color: #155724; margin: 5px 0; }
+          .action-box strong { color: #0c5620; }
+          .footer { background-color: #f5f5f5; padding: 15px 20px; text-align: center; border-top: 1px solid #eee; font-size: 11px; color: #999; }
+          .footer p { margin: 3px 0; }
         </style>
       </head>
       <body>
         <div class="container">
           <div class="header">
-            <h1>New Quote Request</h1>
+            <h1>🌾 New Quote Request Received</h1>
           </div>
+          
+          <div class="alert-banner">
+            ⚠️ NEW LEAD - Action Required: Please follow up with this customer promptly
+          </div>
+          
           <div class="content">
-            <p><strong>A new quote request has been submitted. Please review and follow up promptly.</strong></p>
-            
             <div class="section">
-              <div class="section-title">Customer Information</div>
+              <div class="section-title">📋 Customer Information</div>
               <div class="detail-row">
-                <span class="label">Reference #:</span>
-                <span class="value">${referenceNumber}</span>
+                <span class="label">Reference #</span>
+                <span class="value"><strong>${referenceNumber}</strong></span>
               </div>
               <div class="detail-row">
-                <span class="label">Name:</span>
+                <span class="label">Name</span>
                 <span class="value">${customerName}</span>
               </div>
               <div class="detail-row">
-                <span class="label">Email:</span>
-                <span class="value"><a href="mailto:${customerEmail}">${customerEmail}</a></span>
+                <span class="label">Email</span>
+                <span class="value"><a href="mailto:${customerEmail}" style="color: #b8860b; text-decoration: none;">${customerEmail}</a></span>
               </div>
               <div class="detail-row">
-                <span class="label">Phone:</span>
-                <span class="value">${customerPhone}</span>
+                <span class="label">Phone</span>
+                <span class="value"><a href="tel:${customerPhone}" style="color: #b8860b; text-decoration: none;">${customerPhone}</a></span>
               </div>
+              ${companyName ? `
               <div class="detail-row">
-                <span class="label">Company:</span>
-                <span class="value">${companyName || 'N/A'}</span>
+                <span class="label">Company</span>
+                <span class="value">${companyName}</span>
               </div>
+              ` : ''}
             </div>
 
             <div class="section">
-              <div class="section-title">Quote Details</div>
+              <div class="section-title">📦 Quote Requirements</div>
               <div class="detail-row">
-                <span class="label">Commodity:</span>
-                <span class="value">${commodityType}</span>
+                <span class="label">Commodity</span>
+                <span class="value"><strong>${commodityType}</strong></span>
               </div>
               <div class="detail-row">
-                <span class="label">Quantity:</span>
-                <span class="value">${quantity} ${unit}</span>
+                <span class="label">Quantity</span>
+                <span class="value"><strong>${quantity} ${unit}</strong></span>
               </div>
               <div class="detail-row">
-                <span class="label">Delivery Timeline:</span>
+                <span class="label">Delivery Timeline</span>
                 <span class="value">${deliveryTimeline}</span>
               </div>
+              ${specialRequirements ? `
+              <div class="detail-row">
+                <span class="label">Special Requirements</span>
+                <span class="value">${specialRequirements}</span>
+              </div>
+              ` : ''}
             </div>
 
-            ${specialRequirements ? `
-            <div class="section">
-              <div class="section-title">Special Requirements</div>
-              <p>${specialRequirements}</p>
+            <div class="action-box">
+              <p><strong>✓ Next Steps:</strong></p>
+              <p>1. Review the quote requirements above</p>
+              <p>2. Contact the customer at ${customerEmail} or ${customerPhone}</p>
+              <p>3. Prepare and send a competitive quote</p>
+              <p>4. Update the customer on delivery details and terms</p>
             </div>
-            ` : ''}
-
-            <p style="margin-top: 20px; padding: 10px; background-color: #fff3cd; border-radius: 3px;">
-              <strong>Action Required:</strong> Please contact the customer at ${customerEmail} or ${customerPhone} to provide a quote and discuss delivery details.
-            </p>
           </div>
+          
           <div class="footer">
-            <p>This is an automated notification from the Harvest Commodities quote system.</p>
+            <p>This is an automated notification from Harvest Commodities Quote Management System</p>
+            <p>&copy; 2026 Harvest Commodities. All rights reserved.</p>
           </div>
         </div>
       </body>
@@ -220,8 +268,8 @@ export async function sendAdminNotification(
 
   return sendEmail({
     to: ENV.adminEmail,
-    subject: `New Quote Request - ${commodityType} - Ref #${referenceNumber}`,
+    subject: `🌾 NEW QUOTE REQUEST - ${commodityType} - Ref #${referenceNumber}`,
     html,
-    text: `New Quote Request\n\nCustomer: ${customerName}\nEmail: ${customerEmail}\nPhone: ${customerPhone}\nCompany: ${companyName}\n\nCommodity: ${commodityType}\nQuantity: ${quantity} ${unit}\nDelivery: ${deliveryTimeline}\n\nSpecial Requirements: ${specialRequirements || 'None'}`,
+    text: `NEW QUOTE REQUEST\n\nReference: ${referenceNumber}\n\nCustomer: ${customerName}\nEmail: ${customerEmail}\nPhone: ${customerPhone}\nCompany: ${companyName || 'N/A'}\n\nCommodity: ${commodityType}\nQuantity: ${quantity} ${unit}\nDelivery Timeline: ${deliveryTimeline}\n\nSpecial Requirements: ${specialRequirements || 'None'}\n\nPlease contact the customer promptly to provide a quote.`,
   });
 }

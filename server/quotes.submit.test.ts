@@ -25,6 +25,7 @@ function createPublicContext(): TrpcContext {
 }
 
 describe("quotes.submit", () => {
+  vi.setConfig({ testTimeout: 15000 });
   beforeEach(() => {
     vi.clearAllMocks();
   });

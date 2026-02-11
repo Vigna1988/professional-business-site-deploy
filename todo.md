@@ -50,3 +50,5 @@
 - [x] Create email templates for customer confirmation and admin notification
 - [x] Integrate email sending into quote submission flow
 - [x] Test email functionality and verify delivery
+- [x] Update email templates with Harvest Commodities branding
+- [x] Remove all Manus references from email templates
